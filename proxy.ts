@@ -106,10 +106,12 @@ getNodeList().
   catch(err => console.error(err));
 
 const reqHandler = (req: http.IncomingMessage, res: http.ServerResponse) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Request-Method', '*');
-  res.setHeader('Access-Control-Allow-Methods', '*');
-  res.setHeader('Access-Control-Allow-Headers', '*');
+  if(process.env.USE_CORS == 'true') {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Request-Method', '*');
+    res.setHeader('Access-Control-Allow-Methods', '*');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+  }
 
   const proxy = getProxy(req.url!);
 
